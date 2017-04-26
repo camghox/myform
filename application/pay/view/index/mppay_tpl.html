@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>收银台</title>
+<link href="__ROOT__/css/weui.min.css" rel="stylesheet"/>
+<style>
+.cashier-price-detail{margin:0;padding:1rem auto;background-color:#1AAD19;}
+.cashier-price-detail p,h1{padding:0.4rem 0;color:#ffffff;text-align:center;}
+.cashier-price-title{}
+.cashier-price{font-size:2rem;}
+.cashier-price-number{}
+.cashier-footer{padding:1rem;}
+</style>
+</head>
+<body>
+        <div class="cashier-price-detail">
+          <p class="cashier-price-title"><small>实付金额(元)</small></p>
+          <p class="cashier-price">{$trade.price}</p>
+          <p class="cashier-trade-number"><small>订单号：{$trade.trade_no}</small></p>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>商家名称</p>
+                </div>
+                <div class="weui-cell__ft">Loveme情侣酒店</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>支付方式</p>
+                </div>
+                <div class="weui-cell__ft">微信支付</div>
+            </div>
+        </div>
+        <div class="cashier-footer">
+          <a href="javascript:;" class="weui-btn weui-btn_primary cashier-pay-btn">确认支付</a>
+        </div>
+        
+        {eq name="Think.config.app_debug" value="true"}
+        <a href="javascript:;" class="show_debug_log" style="position: fixed;right: 1rem;bottom: 1rem;"><i class="weui-icon-warn"></i></a>
+        <div id="debug_log_dialog" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">调试日志</strong></div>
+                <div class="weui-dialog__bd">
+                    <div class="debug-console" style="width:100%;height:20rem;overflow: scroll;">
+                    <p style="font-size:0.6rem;border-bottom: 1px solid #888888;text-align: left;">openid={$Think.session.open_id}</p>
+                    <p style="font-size:0.6rem;border-bottom: 1px solid #888888;text-align: left;">jssign={php}var_dump($jssign);{/php}</p>
+                    <p style="font-size:0.6rem;border-bottom: 1px solid #888888;text-align: left;">paysign={php}var_dump($paysign);{/php}</p>
+                    </div>
+                </div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary dialog_close">关闭</a>
+                </div>
+            </div>
+        </div>
+        {/eq}
+</body>
+<!--
+  {php}//var_dump($room);{/php}
+-->
+<script src="__ROOT__/js/common.js"></script>
+<script src="__ROOT__/js/jquery.min.js"></script>
+<script src="__ROOT__/js/weui.min.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+    {notempty name='jssign'}
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{$jssign.appId}', // 必填，公众号的唯一标识
+        timestamp: '{$jssign.timestamp}', // 必填，生成签名的时间戳
+        nonceStr: '{$jssign.nonceStr}', // 必填，生成签名的随机串
+        signature: '{$jssign.signature}',// 必填，签名，见附录1
+        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function(){
+    });
+    wx.error(function(res){
+        console.info(res);
+    });
+    {/notempty}
+    {notempty name='paysign'}
+    function wxpay(){
+        wx.chooseWXPay({
+            timestamp: "{$paysign.timeStamp}", // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            nonceStr: "{$paysign.nonceStr}", // 支付签名随机串，不长于 32 位
+            package: "{$paysign.package}", // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+            signType: "{$paysign.signType}", // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+            paySign: "{$paysign.paySign}", // 支付签名
+            success: function (res) {
+                location = '__ROOT__/order?trade_no={$trade.trade_no}';
+            },
+            cancel: function(res){
+                //weui.alert(res);
+            }
+        });
+    }
+    {/notempty}
+    $(function(){
+        $('.cashier-pay-btn').click(function(){
+            if(wxpay)wxpay();
+        });
+        $('body').on('click', '.show_debug_log', function(){
+            $('#debug_log_dialog').css('display', 'block');
+        })
+        $('body').on('click', '.dialog_close', function(){
+            $('#debug_log_dialog').css('display', 'none');
+        })
+    });
+    
+    </script>
+</html>
+

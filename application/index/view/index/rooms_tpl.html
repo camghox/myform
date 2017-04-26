@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>LoveMe情侣主题酒店</title>
+<link rel="shortcut icon" href="http://loveme.xifenhezi.com/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="__ROOT__/css/zy.css"/>
+<link rel="stylesheet" type="text/css" href="__ROOT__/css/zy1.css"/>
+</head>
+<body>
+<div class="tou">
+  <div class="toubudaxiao">
+  <div class="toubujvzhong">
+	<div class="ruzhu">
+    	<span class="ruzhu_a">入住</span>
+        		<br />
+        <span class="ruzhu_b">{$startdate}</span>
+    </div>
+    <div class="yiwan">
+        <div>
+            <img src="__ROOT__/images/2547.png"/>
+            <p>共{$dates}晚</p>
+        </div>        	
+    </div>
+    <div class="lidian">
+        <span class="lidian_a">离店</span>
+    			<br />
+        <span class="lidian_b">{$enddate}</span>
+    </div>        		   
+ </div>	 	
+</div>     
+</div>
+<div class="neirong">
+
+{volist name="list" id="vo"}
+  <a href="__ROOT__/room?id={$vo.outid}">
+  <div class="fangjianzhengti1">
+  	<div class="tupian1">
+      <img src="__ROOT__/thumb.php?pic=/rooms/{$vo.outid}/{$vo.pic1}.jpg&s=177x119"/>
+    </div>
+    
+    <div class="mingcheng1">
+      <span class="mingcheng_a">{$vo.title}</span>
+      <span class="mingcheng_b">{$vo.outid}</span>
+    </div>
+      
+    <div class="xiantiao">
+    	<img src="__ROOT__/images/25455.png"/>
+    </div>
+    
+    <div class="jiage1">
+   		<span class="jiage_a">¥{$vo.price}</span>
+   		<span class="jiage_b">可预订</span>
+    </div> 
+  </div>
+  </a>
+{/volist}
+</div>
+<img src="__ROOT__/images/kongbai.png"/>
+
+</body>
+</html>

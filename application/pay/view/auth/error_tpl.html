@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>错误</title>
+        <link rel="shortcut icon" href="http://loveme.xifenhezi.com/favicon.ico"/>
+        <link href="__ROOT__/css/weui.min.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">{$error}</h2>
+                <p class="weui-msg__desc"></p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <a href="__ROOT__/rooms" class="weui-btn weui-btn_primary">返回首页</a>
+                </p>
+            </div>
+            <!--
+            <div class="weui-msg__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+                    </p>
+                    <p class="weui-footer__text">Copyright © 2008-2016 weui.io</p>
+                </div>
+            </div>
+            -->
+        </div>
+        <!--
+        <h1>idx = {$idx}</h1>
+        {present name="oauth_url"}
+        <h3>OAUTH URL</h3>
+        <p>oauth_url = {$oauth_url}</p>
+        {/present}
+        <h3>PARAMS</h3>
+        <p>open_id = {$Think.session.open_id}</p>
+        <p>user_token = {$Think.session.user_token}</p>
+        <p>token_time = {$Think.session.token_time}</p>
+        <p>wxuser = {$Think.session.wxuser|var_dump}</p>
+        <h3>ERROR</h3>
+        {present name="error"}
+        <p>{$error}</p>
+        {/present}
+        -->
+    </body>
+</html>

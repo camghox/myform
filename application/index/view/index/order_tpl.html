@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>订单详情</title>
+<link rel="shortcut icon" href="http://loveme.xifenhezi.com/favicon.ico"/>
+<link href="__ROOT__/css/weui.min.css" rel="stylesheet"/>
+<style>
+.order-price-detail{margin:0;padding:1rem auto;background-color:#1AAD19;}
+.order-price-detail p,h1{padding:0.4rem 0;color:#ffffff;text-align:center;}
+.order-price-title{}
+.order-price{font-size:2rem;}
+.order-price-number{}
+.order-footer{padding:1rem;}
+</style>
+</head>
+<body>
+        <div class="weui-cells__title">订单号：{$trade.trade_no}</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>订单内容</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.content}</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>订单金额</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.price}</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>入住日期</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.indate}</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>离店日期</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.outdate}</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>支付方式</p>
+                </div>
+                <div class="weui-cell__ft">微信支付</div>
+            </div>
+            
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>联系人</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.contact}</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>联系电话</p>
+                </div>
+                <div class="weui-cell__ft"><a href="tel:{$trade.phone}">{$trade.phone}</a></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>订单时间</p>
+                </div>
+                <div class="weui-cell__ft">{$trade.addtime}</div>
+            </div>
+        </div>
+        <div class="order-footer">
+        </div>
+</body>
+<!--
+  {php}//var_dump($room);{/php}
+-->
+<script src="__ROOT__/js/common.js"></script>
+<script src="__ROOT__/js/jquery.min.js"></script>
+<script src="__ROOT__/js/weui.min.js"></script>
+<script>
+    $(function(){
+
+    });
+</script>
+</html>
+

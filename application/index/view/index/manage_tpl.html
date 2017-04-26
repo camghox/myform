@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>房间管理</title>
+<link rel="shortcut icon" href="http://loveme.xifenhezi.com/favicon.ico"/>
+<link href="__ROOT__/css/weui.min.css" rel="stylesheet"/>
+<style>
+input[type=text]{border:none;font-size:1.2rem;width:4rem;}
+.tabbar{position:fixed;bottom:0;height:3.2rem;width:100%;border-top:1px solid #dedede;background-color:#ffffff;}
+</style>
+</head>
+<body>
+<div>
+    
+    <div class="weui-cells__title">房间管理 </div>
+    <div class="weui-cells">
+    {volist name="list" id="vo"}
+        <div class="weui-cell">
+            <div class="weui-cell__hd"></div>
+            <div class="weui-cell__bd">
+                <p>
+                    <span>[{$vo.outid}] {$vo.title}</span>
+                    <span style="float:right;">￥<input type="text" class="price-input" value="{$vo.price}" rbid="{$vo.outid}"/></span>
+                </p>
+                <p>
+                    <a href="javascript:;" 
+                    class="weui-btn weui-btn_mini {switch name="vo.stat"}{case value="1"}weui-btn_primary{/case}{case value="2"}weui-btn_default{/case}{/switch} book-btn" rbid="{$vo.outid}" stat="1">可订</a>
+                    <a href="javascript:;" 
+                    class="weui-btn weui-btn_mini {switch name="vo.stat"}{case value="1"}weui-btn_default{/case}{case value="2"}weui-btn_primary{/case}{/switch} book-btn" rbid="{$vo.outid}" stat="2">已订</a>
+                </p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
+    {/volist}
+    </div>
+    </div>
+
+    <div class="tabbar">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" id="all-enable-btn" style="margin:0.2rem;">全部设为可订</a>
+    </div>
+</body>
+<script src="__ROOT__/js/jquery.min.js"></script>
+<script src="__ROOT__/js/weui.min.js"></script>
+<script>
+$(function(){
+    $('body').on('click', '.book-btn', function(){
+        var rbid = $(this).attr('rbid');
+        var stat = $(this).attr('stat');
+        $.post('{:url("index/ajax/room_stat")}', {rbid:rbid, stat:stat}, function(d){
+            if(d && d['ret'] === 0){
+                weui.toast('设置成功');
+                setTimeout("location.reload(true) + '?' + Math.random();", 1000);
+            }
+        })
+    });
+    $('body').on('change', '.price-input', function(){
+        var rbid = $(this).attr('rbid');
+        var price = $(this).val();
+        $.post('{:url("index/ajax/room_price")}', {rbid:rbid, price:price}, function(d){
+            if(d && d['ret'] === 0){
+                weui.toast('设置成功');
+                setTimeout("location.reload(true) + '?' + Math.random();", 1000);
+            }
+        })
+    });
+    $('#all-enable-btn').click(function(){
+        weui.dialog({
+            title: '系统提示',
+            content: '是否全部房间设置为可订？',
+            className: 'custom-classname',
+            buttons: [{
+                label: '取消',
+                type: 'default',
+                onClick: function () {
+                    
+                }
+            }, {
+                label: '确定',
+                type: 'primary',
+                onClick: function () {
+                    $.post('{:url("index/ajax/room_stat_en")}', {}, function(d){
+                        if(d && d['ret'] === 0){
+                            weui.toast('设置成功');
+                            setTimeout("location.reload(true) + '?' + Math.random();", 1000);
+                        }
+                    })
+                }
+            }]
+        });
+    });
+
+});
+</script>
+</html>
+

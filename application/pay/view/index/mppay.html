@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>微信支付</title>
+        <link rel="stylesheet" href="__ROOT__/static/css/weui.min.css" />
+    </head>
+    <body style="background-color: #f8f8f8">
+        <div class="container" id="container">
+            <div class="page__hd">
+                <p class="page__desc" style="text-align:center;">&nbsp;</p>
+                <p class="page__desc" style="text-align:center;">应付金额:</p>
+                <h1 class="page__title" style="text-align:center;color:#d14d14;">¥{$order.money}</h1>
+            </div>
+            <div class="page__bd">
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>收款方</p>
+                        </div>
+                        <div class="weui-cell__ft">{$order.payee}</div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>订单号</p>
+                        </div>
+                        <div class="weui-cell__ft">{$order.orderid}</div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>订单详情</p>
+                        </div>
+                        <div class="weui-cell__ft">{$order.descr}</div>
+                    </div>
+                </div>
+                <div style="padding:15px;">
+                    <a href="javascript:;" class="weui-btn weui-btn_primary wxpay_btn">微信支付</a>
+                </div>
+            </div>
+        </div>
+
+        {if $jssign neq null}
+        <h1>Hello!</h1>
+        <p>{$jssign|json_encode}</p>
+        <p>{$paysign|json_encode}</p>
+        {/if}
+    </body>
+    <script src="__ROOT__/static/js/zepto.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+    var openid = '{$Think.get.openid}';
+    {if $jssign neq null}
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{$jssign.appId}', // 必填，公众号的唯一标识
+        timestamp: '{$jssign.timestamp}', // 必填，生成签名的时间戳
+        nonceStr: '{$jssign.nonceStr}', // 必填，生成签名的随机串
+        signature: '{$jssign.signature}',// 必填，签名，见附录1
+        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function(){
+    });
+    wx.error(function(res){
+        console.info(res);
+    });
+    $(function(){
+        function wxpay(){
+            wx.chooseWXPay({
+                timestamp: "{$paysign.timeStamp}", // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                nonceStr: "{$paysign.nonceStr}", // 支付签名随机串，不长于 32 位
+                package: "{$paysign.package}", // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                signType: "{$paysign.signType}", // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                paySign: "{$paysign.paySign}", // 支付签名
+                success: function (res) {
+                    alert(res);
+                },
+                cancel: function(){
+                }
+            });
+        }
+        $('.wxpay_btn').click(function(){
+            wxpay();
+        });
+    });
+    {/if}
+    </script>
+</html>

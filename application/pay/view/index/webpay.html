@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+        <title>微信支付</title>
+        <link rel="stylesheet" href="__ROOT__/static/css/weui.min.css" />
+    </head>
+    <body style="background-color: #f8f8f8">
+        <div class="container" id="container">
+            <div class="page__hd">
+                <h2 class="page__title" style="padding:15px;background-color:#ffffff;">收银台</h2>
+            </div>
+            <div class="page__hd">
+                <p style="padding:10px 15px 5px 15px;font-size:0.9rem;color:#888888;">
+                    <span><small>订单详情：</small>{$order.descr}</span>
+                    <span style="float:right;"><small>订单金额：</small><b>{$order.money}</b><small>元</small></span>
+                </p>
+                <p style="padding:5px 15px 15px 15px;font-size:0.9rem;color:#888888;">
+                    <small>订单号：</small>{$order.orderid}
+                </p>
+            </div>
+            <div class="page__hd" style="background-color:#ffffff;">
+                <p class="page__title" style="padding:15px 15px 0 15px;background-color:#ffffff;"><small>收款方：</small>{$order.payee}</p>
+                <div style="margin:15px;padding:4px;background-color:#ffffff;/*border:2px solid #62ab00;*/">
+                    <img src="__ROOT__/static/images/weixinpay-logo.jpg" style="position:relative;top:6px;height:24px;">微信支付 
+                    <small>应支付</small> <b style="color:#d14d14;">{$order.money}</b><small>元</small>
+                </div>
+                <div style="margin:15px;padding:4px;height:480px;">
+                    <div style="width:200px;float:left;margin:15px;">
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=L|4&chl=http://www.baidu.com" style="width:200px;"/>
+                        <img src="__ROOT__/static/images/weixinpay-scan.png" style="width:200px;"/>
+                    </div>
+                    <div style="width:320px;float:left;margin:15px;">
+                        <img src="__ROOT__/static/images/weixinpay-example.png" style="width:320px;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {if $paysign neq null}
+        <h1>Pay!</h1>
+        <p>{$paysign}</p>
+        <p><img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=L|4&chl={$paysign}"/></p>
+        {/if}
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="__ROOT__/static/uikit/css/uikit.min.css" />
+        <link rel="stylesheet" href="__ROOT__/static/uikit/css/72fanke.min.css" />
+        <script src="__ROOT__/static/js/jquery.js"></script>
+        <script src="__ROOT__/static/uikit/js/uikit.min.js"></script>
+    </head>
+    <body>
+        <h1>idx = {$idx}</h1>
+        {present name="oauth_url"}
+        <h3>OAUTH URL</h3>
+        <p>oauth_url = {$oauth_url}</p>
+        {/present}
+        <h3>PARAMS</h3>
+        <p>open_id = {$Think.session.open_id}</p>
+        <p>user_token = {$Think.session.user_token}</p>
+        <p>token_time = {$Think.session.token_time}</p>
+        <p>wxuser = {$Think.session.wxuser|var_dump}</p>
+        <h3>ERROR</h3>
+        {present name="error"}
+        <p>{$error}</p>
+        {/present}
+    </body>
+</html>
