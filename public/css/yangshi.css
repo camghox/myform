@@ -1,0 +1,31 @@
+*{
+ margin: 0;
+ padding: 0;
+ list-style: none;
+ text-decoration: none; 
+ border: 0;
+ }
+.biaodan_toubu{width:100%; height:3.5625rem; background:#fff; text-align:center;}
+.biaodan_toubu span{ font-size:1.375rem;color:#174593; line-height:3.5625rem;}
+
+
+.biaodan_img{width:100%; height:15rem; background:#fff;}
+.biaodan_img1{width:92%;height:11.3125rem; background:#789fe1; margin:0 auto;}
+.biaodan_img2{width:92%; margin:0 auto;font-size:1.25rem;}
+.biaodan_img2 p{word-wrap: break-word;}
+
+.xiantiao{width:100%;height:0.0625rem; margin-bottom:0.8125rem;}
+.xiantiao img{width:100%; float:left;}
+
+
+.biaodan_biaodan{width:100%; height:29rem; background:#fff; border-bottom:1px #CCCCCC solid;}
+.biaodan_biaodan1{width:92%;margin:0 auto;}
+.biaodan_biaodan1 span{ font-size:1rem;}
+.biaodan_biaodan1 a{color:#F00;}
+.kongji{width:100%; height:2.5rem;border-radius:0.3125rem; margin-top:0.4375rem; margin-bottom:1.6875rem; border:0.0625rem solid #a4a4a4; font-size:1rem;}
+.tijiao{width:100%; height:2.5rem;border-radius:0.3125rem; background:#2863c6; text-align:center; margin-top:0.8125rem;font-size:1.405625rem; color:#fff;line-height:2.375rem;}
+
+
+
+.biaodan_dinbu{width:100%; height:2.875rem; background:#789fe1; text-align:center;}
+.biaodan_dinbu span{ font-size:0.849375rem; color:#fff000; line-height:2.875rem;}
