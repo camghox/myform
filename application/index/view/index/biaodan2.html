@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="__ROOT__/css/yangshi.css"> 	
+	<link rel="stylesheet" type="text/css" href="__ROOT__/css/yangshi.css"> 
+    <script type="text/javascript" src="__ROOT__/js/jquery.js"></script>
+    <script type="text/javascript" src="__ROOT__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__ROOT__/js/weui.min.js"></script>	
 <title>脉腾体育足球培训中心</title>
 </head>
 
@@ -20,26 +23,27 @@
 
 <div class="xiantiao"><img src="__ROOT__/img/xiantiao.png"/></div>
 <div class="biaodan_biaodan">
-
+<form action="" method="post">
 	<div class="biaodan_biaodan1">
     	<span>姓名</span>
-        <input class="kongji" type="text"/>    
+        <input class="kongji" type="text" id="name" name="name"/>    
     </div>
 	<div class="biaodan_biaodan1">
     	<span>手机<a>*</a></span>
-        <input class="kongji" type="text"/>    
+        <input class="kongji" type="text" id="mobile" name="mobile"/>    
     </div>
     <div class="biaodan_biaodan1">
     	<span>小孩姓名</span>
-        <input class="kongji" type="text"/>   
+        <input class="kongji" type="text" id="child_name" name="child_name"/>   
     </div>
     <div class="biaodan_biaodan1">
     	<span>小孩年龄</span>
-        <input class="kongji" type="text"/>    
+        <input class="kongji" type="text" id="child_age" name="child_age"/>    
     </div>
     <div class="biaodan_biaodan1">
-    	<input class="tijiao" type="submit" style="font-size:1.2rem;">   
+    	<input class="tijiao" type="button" value="提交" style="font-size:1.2rem;"> <input type="reset" name="reset" style="display: none;" />
     </div>
+</form>
 </div>
 
 
@@ -47,6 +51,25 @@
 <span>广州培正网络科技有限公司</span>
 </div>
 
-
+<script>  
+    $(function(){          
+        $('.biaodan_biaodan1').on('click', '.tijiao', function(){
+            var name = $('#name').val();
+            var mobile = $('#mobile').val();
+            var child_name = $('#child_name').val();
+            var child_age = $('#child_age').val();
+            $.post('{:url("index/index/add")}', {name:name, mobile:mobile, child_name:child_name, child_age:child_age}, function(data){
+                if(data){
+                    alert(data['msg']);
+                    if(data['error']){
+                        $('#mobile').val("");                       
+                    }else{
+                        $("input[type=reset]").trigger("click");
+                    }                   
+                }
+            },'json')
+        });
+    });
+    </script>
 </body>
 </html>

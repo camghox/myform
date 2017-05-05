@@ -3,13 +3,12 @@ namespace app\index\controller;
 
 use think\Session;
 use think\Log;
+use think\Request;
 
 use app\pay\wechat\Wechat;
 use app\pay\wechat\Wechatpay;
 
-use app\index\service\UserService;
-use app\index\service\RoomService;
-use app\pay\service\PayService;
+use app\index\service\MyformService;
 
 class Index
 {
@@ -36,6 +35,29 @@ class Index
         $data = I('post.');
         \think\Log::record("data=$data");
         return view('biaodan', []);
+    }
+
+    public function add()
+    {
+        
+            $name = input('post.name');
+            $mobile = input('post.mobile');
+            $child_name=input('post.child_name');
+            $child_age=input('post.child_age');
+            $MyformService = new MyformService;
+            if(!isset($mobile) || empty($mobile)){
+                return json(['error'=>1, 'msg'=>'手机号不能为空']);
+            }
+            if(!$MyformService->isMobile($mobile)){
+                return json(['error'=>2, 'msg'=>'手机号不正确']);
+            }
+            
+            $user = $MyformService->add($name,$mobile,$child_name,$child_age);
+            if($user){
+                return json(['ret'=>1, 'msg'=>'提交成功']);
+            }else{
+                return json(['ret'=>0,'msg'=>'提交失败']);
+            }      
     }
 
     /*

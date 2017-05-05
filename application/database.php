@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => 'localhost',
     // 数据库名
-    'database'        => 'loveme',
+    'database'        => 'soccer',
     // 用户名
-    'username'        => 'loveme',
+    'username'        => 'root',
     // 密码
-    'password'        => 'loveme',
+    'password'        => '',
     // 端口
     'hostport'        => '',
     // 连接dsn
