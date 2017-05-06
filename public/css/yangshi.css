@@ -10,7 +10,7 @@
 
 
 .biaodan_img{width:100%; height:15rem; background:#fff;}
-.biaodan_img1{width:92%;height:11.3125rem; background:url('../img/soccer.jpg') center no-repeat; margin:0 auto;background-size: 100%;}
+.biaodan_img1{width:92%;height:11.3125rem; background:url('../images/soccer.jpg') center no-repeat; margin:0 auto;background-size: 100%;}
 .biaodan_img2{width:92%; margin:0 auto;font-size:1.25rem;}
 .biaodan_img2 p{word-wrap: break-word;}
 
@@ -27,5 +27,5 @@
 
 
 
-.biaodan_dinbu{width:100%; height:2.875rem; background:#789fe1; text-align:center;}
-.biaodan_dinbu span{ font-size:0.849375rem; color:#fff000; line-height:2.875rem;}
+.biaodan_dinbu{width:100%; height:2rem; background:#789fe1; text-align:center;}
+.biaodan_dinbu span{ font-size:0.849375rem; color:#fff000; line-height:2rem;}
